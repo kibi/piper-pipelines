@@ -6,7 +6,7 @@ inputs:
     type: string
     required: true
 
-  - name: output
+  - name: output1
     label: Input File
     type: string
     required: true
@@ -47,5 +47,5 @@ tasks:
       "-bufsize","1000k",
       "-vf","scale=-2:${targetHeight}",
       "-b:a","128k",
-      "${output}"
+      "${output1}"
     ]
