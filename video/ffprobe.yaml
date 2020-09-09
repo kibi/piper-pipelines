@@ -1,7 +1,7 @@
 label: ffprobe
 
 inputs:
-  - name: input
+  - name: inputFile
     label: Input File
     type: string
     required: true
@@ -10,4 +10,4 @@ tasks:
 
   - name: ffprobe
     type: media/ffprobe
-    input: ${input}
+    input: ${inputFile}

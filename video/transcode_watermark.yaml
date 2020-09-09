@@ -1,7 +1,7 @@
 label: Transcode and watermark
 
 inputs:
-  - name: input
+  - name: inputFile
     label: Input File
     type: string
     required: true
@@ -11,8 +11,8 @@ inputs:
     type: string
     required: true
 
-  - name: output
-    label: Input File
+  - name: outputFile
+    label: Output File
     type: string
     required: true
 
@@ -25,7 +25,7 @@ tasks:
 
   - name: height
     type: media/ffprobe
-    input: ${input}
+    input: ${inputFile}
     output: ${execution.output.video[0].height}
 
   - name: targetHeight
@@ -42,7 +42,7 @@ tasks:
     type: media/ffmpeg
     options: [
       -y,
-      -i, "${input}",
+      -i, "${inputFile}",
       -i, "${watermark}",
       "-filter_complex","[0:v]scale=-2:${targetHeight}[bg];[bg][1:v]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2",
       "-pix_fmt","yuv420p",
@@ -54,5 +54,5 @@ tasks:
       "-threads","0",
       "-codec:a","libfdk_aac",
       "-b:a","128k",
-      "${output}"
+      "${outputFile}"
     ]

@@ -1,12 +1,12 @@
 label: HLS (Single Bitrate)
 
 inputs:
-  - name: input
+  - name: inputFile
     label: Input File
     type: string
     required: true
 
-  - name: output
+  - name: outputDir
     label: Output Directory
     type: string
     required: true
@@ -16,7 +16,7 @@ tasks:
     type: media/ffmpeg
     options: [
       -y,
-      -i, "${input}",
+      -i, "${inputFile}",
       -vf,"scale=w=1280:h=720:force_original_aspect_ratio=decrease",
       "-c:a", aac,
       "-ar","48000",
@@ -32,5 +32,5 @@ tasks:
       -bufsize,3750k,
       -hls_time,4,
       -hls_playlist_type,vod,
-      -hls_segment_filename,"${output}/720p_%03d.ts","${output}/720p.m3u8"
+      -hls_segment_filename,"${outputDir}/720p_%03d.ts","${outputDir}/720p.m3u8"
     ]

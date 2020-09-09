@@ -1,29 +1,29 @@
 label: Split and Stitch Demo
 
 inputs:
-  - name: input
+  - name: inputFile
     label: Input File
     type: string
     required: true
 
-  - name: output
+  - name: outputFile
     label: Output File
     type: string
     required: true
 
 tasks:
 
-  - name: input
+  - name: inputFile
     type: core/var
-    value: ${input}
+    value: ${inputFile}
 
   - name: outputDir
     type: io/filePath
-    filename: ${output}
+    filename: ${outputFile}
 
   - name: chunks
     type: media/vsplit
-    input: ${input}
+    input: ${inputFile}
     chunkSize: 10s
 
   - name: chunks
@@ -43,7 +43,7 @@ tasks:
       options: [
         "-y",
         "-ss", "${item.start}",
-        "-i", "${input}",
+        "-i", "${inputFile}",
         "-to","${item.end}",
         "${item.output}"
       ]
@@ -57,4 +57,4 @@ tasks:
 
   - type: media/vstitch
     chunks: ${chunkPaths}
-    output: ${output}
+    output: ${outputFile}

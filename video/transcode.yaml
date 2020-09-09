@@ -1,13 +1,13 @@
 label: Transcode
 
 inputs:
-  - name: input
+  - name: inputFile
     label: Input File
     type: string
     required: true
 
-  - name: output1
-    label: Input File
+  - name: outputFile
+    label: Output File
     type: string
     required: true
 
@@ -20,8 +20,8 @@ tasks:
 
   - name: height
     type: media/ffprobe
-    input: ${input}
-    output: ${execution.output.video[0].height}
+    input: ${inputFile}
+    output2: ${execution.output.video[0].height}
 
   - name: targetHeight
     type: switch
@@ -38,7 +38,7 @@ tasks:
     type: media/ffmpeg
     options: [
       -y,
-      -i, "${input}",
+      -i, "${inputFile}",
       "-pix_fmt","yuv420p",
       "-codec:v","libx264",
       "-preset","fast",
@@ -47,5 +47,5 @@ tasks:
       "-bufsize","1000k",
       "-vf","scale=-2:${targetHeight}",
       "-b:a","128k",
-      "${output1}"
+      "${outputFile}"
     ]
