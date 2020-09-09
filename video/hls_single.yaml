@@ -16,8 +16,8 @@ tasks:
     type: media/ffmpeg
     options: [
       -y,
-      -i, "${inputFile}",
-      -vf,"scale=w=1280:h=720:force_original_aspect_ratio=decrease",
+      -i, "${input}",
+      -vf,"scale=w=-2:h=720",
       "-c:a", aac,
       "-ar","48000",
       "-b:a","128k",
