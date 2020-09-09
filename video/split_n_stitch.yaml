@@ -34,7 +34,7 @@ tasks:
       value:
         start: ${item.start}
         end: ${item.end}
-        output: ${outputDir}/chunk_${itemIndex}.mp4
+        output2: ${outputDir}/chunk_${itemIndex}.mp4
 
   - type: each
     list: ${chunks}
@@ -57,4 +57,3 @@ tasks:
 
   - type: media/vstitch
     chunks: ${chunkPaths}
-    output: ${outputFile}
